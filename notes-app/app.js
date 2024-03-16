@@ -1,19 +1,65 @@
 const chalk = require('chalk')
+const yargs = require('yargs')
 const getNotes = require('./notes.js')
-const { default: isURL } = require('validator/lib/isURL.js')
-
-const msg = getNotes()
-console.log(msg)
-console.log(chalk.green.inverse.bold('Success'))
 
 
+//customize yargs version 
+
+//Add command
+yargs.command({
+    command:'add',
+    describe:'Add a note',
+    builder:{
+        title:{
+            describe:'Note title',
+            demandOption:true,
+            type:'string'
+        },
+        body:{
+            describe:'Note body',
+            demandOption: true,
+            type: 'string'
+        }
+    },
+    handler:function(argv){
+        console.log('Title: '+argv.title)
+        console.log('Body: '+argv.body)
+    }
+})
+
+//Remove command
+yargs.command({
+    command:'remove',
+    describe:'remove a note',
+    handler:function(){
+        console.log('Removing the note')
+    }
+})
+
+//List command
+yargs.command({
+  command:'list',
+  describe:'list all note',
+  handler:function(){
+    console.log('listing all the note')
+  }  
+})
+
+//Read command
+yargs.command({
+    command:'read',
+    describe:'Read all note',
+    handler:function(){
+        console.log('reading all the note')
+    }
+})
+
+yargs.parse()
 
 
 
 
 
 
-// const add = require('./utils.js')
 
-// const sum = add(2,5)
-// console.log(sum)
+
